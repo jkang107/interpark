@@ -1,0 +1,65 @@
+<html>
+ <head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+  var url = "http://ticket.interpark.com/Book/Lib/BookInfoXml.asp?Flag=SeatGrade&GoodsCode=14005219&PlaceCode=14000573&BizCode=WEBBR&PlaySeq=001";
+  //var url2 = "http://ticket.interpark.com/Book/Lib/BookInfoXml.asp?Flag=SeatGrade&GoodsCode=14006835&PlaceCode=14006835&BizCode=WEBBR&PlaySeq=001";
+  
+  //var url2 = "http://ticket.interpark.com//Book/Lib/BookInfoXml.asp?Flag=SeatGrade&GoodsCode=14006835&PlaceCode=14000811&BizCode=WEBBR&PlaySeq=001";
+
+  var url2 = "http://ticket.interpark.com//Book/Lib/BookInfoXml.asp?Flag=SeatGrade&GoodsCode=14005022&PlaceCode=14000554&BizCode=WEBBR&PlaySeq=001";
+  var xmlData, timer;
+
+  $.get(url2, function(response) { 
+    xmlData = response;
+    //var standing = xmlData.getElementsByTagName("RemainCnt")[1].childNodes[0].nodeValue;
+    var seating = xmlData.getElementsByTagName("RemainCnt")[0].childNodes[0].nodeValue;
+    //$("#standing").text(standing);
+    $("#seating").text(seating);
+    var d = new Date();
+    var hour = d.getHours(); 
+    var min = d.getMinutes(); 
+    var sec = d.getSeconds();
+    $("body").append("<div>" + hour + ":" + min + ":" + sec + "</div>");
+
+    if(/*standing > 0 ||*/ seating > 0) {
+      $("span").css({"color": 'red', 'font-size' : '300%'});
+    
+      playMusic();
+
+    //if(confirm(">> standing: " + standing + ", >> seating: " + seating) == true) {
+    if(confirm(">> seating: " + seating) == true) {
+      pauseMusic();
+     //if(timer) {
+      clearTimeout(timer);
+      timer = 0;
+     //}
+    } 
+   }
+   timer = setTimeout(function() {
+    location.reload();
+   }, 1000);
+  });
+
+  function playMusic() {
+    //$("#music").play();
+    var music = document.getElementById("music");
+    music.play();
+  }
+
+  function pauseMusic() {
+    var music = document.getElementById("music");
+    music.pause();
+  }
+  </script>
+ </head>
+ <body>
+  <!-- <h1>standing: <span id ="standing"></span></h1> -->
+  <h1>seating: <span id ="seating"></span></h1>
+  <audio id="music">
+    <source src="./fall_to_fly.mp3" type="audio/mpeg">
+  </audio>
+  <button onclick="playMusic()">play</button>
+  <button onclick="pauseMusic()">pause</button></br>
+ </body>
+</html> 
