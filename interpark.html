@@ -13,23 +13,35 @@
   $.get(url2, function(response) { 
     xmlData = response;
     //var standing = xmlData.getElementsByTagName("RemainCnt")[1].childNodes[0].nodeValue;
-    var seating = xmlData.getElementsByTagName("RemainCnt")[0].childNodes[0].nodeValue;
+    var seating0 = xmlData.getElementsByTagName("RemainCnt")[0].childNodes[0].nodeValue;
+    var seating1 = xmlData.getElementsByTagName("RemainCnt")[1].childNodes[0].nodeValue;
+    var seating2 = xmlData.getElementsByTagName("RemainCnt")[2].childNodes[0].nodeValue;
+    var seating3 = xmlData.getElementsByTagName("RemainCnt")[3].childNodes[0].nodeValue;
+    var seating4 = xmlData.getElementsByTagName("RemainCnt")[4].childNodes[0].nodeValue;
+    var seating5 = xmlData.getElementsByTagName("RemainCnt")[5].childNodes[0].nodeValue;
     //$("#standing").text(standing);
-    $("#seating").text(seating);
+    $("#seating0").text(seating0);
+    $("#seating1").text(seating1);
+    $("#seating2").text(seating2);
+    $("#seating3").text(seating3);
+    $("#seating4").text(seating4);
+    $("#seating5").text(seating5);
+
     var d = new Date();
     var hour = d.getHours(); 
     var min = d.getMinutes(); 
     var sec = d.getSeconds();
     $("body").append("<div>" + hour + ":" + min + ":" + sec + "</div>");
 
-    if(/*standing > 0 ||*/ seating > 0) {
+    if(/*standing > 0 ||*/ seating0 > 0 || seating1 > 0 || seating2 > 0 || seating3 > 0 || seating4 > 0 || seating5 > 0 ) {
       $("span").css({"color": 'red', 'font-size' : '300%'});
     
       playMusic();
 
     //if(confirm(">> standing: " + standing + ", >> seating: " + seating) == true) {
-    if(confirm(">> seating: " + seating) == true) {
-      pauseMusic();
+    //if(confirm(">> seating: " + seating) == true) {
+      if(confirm("seat remain!! ")) {
+        pauseMusic();
      //if(timer) {
       clearTimeout(timer);
       timer = 0;
@@ -55,7 +67,12 @@
  </head>
  <body>
   <!-- <h1>standing: <span id ="standing"></span></h1> -->
-  <h1>seating: <span id ="seating"></span></h1>
+  <h2>seating0: <span id ="seating0"></span></h2>
+  <h2>seating1: <span id ="seating1"></span></h2>
+  <h2>seating2: <span id ="seating2"></span></h2>
+  <h2>seating3: <span id ="seating3"></span></h2>
+  <h2>seating4: <span id ="seating4"></span></h2>
+  <h2>seating5: <span id ="seating5"></span></h2>
   <audio id="music">
     <source src="./fall_to_fly.mp3" type="audio/mpeg">
   </audio>
